@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajay Aujla</title>
+
+    <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+    
+    <!-- Stylesheets -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.8/jquery.fullPage.css" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" type="text/css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+    
+    <link href="styles/style.css" type="text/css" rel="stylesheet"/>
+
+</head>
+<body data-target=".navbar-fixed-top">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-transparent">
+        <div class="container">
+
+            <div class="navbar-header">
+                <a class="navbar-brand"><span>Ajay Aujla</span></a>
+                
+                <!-- Navigation Menu Button -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div id="navbar" class="collapse navbar-collapse">
+
+                <!-- Social Links -->
+                <ul class="nav navbar-nav navbar-right navbar-social">
+                    <li><a href="https://github.com/AjayAujla/" target="_blank"><i class="fa fa-lg fa-github"></i></a></li>
+                    <li><a href="https://linkedin.com/in/AjayAujla/" target="_blank"><i class="fa fa-lg fa-linkedin"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <form>
+            <div class="row">
+                <div class="row">
+                    <h1>DRIP Calculator</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="row">
+                    <h2>Stock Info</h2>
+                </div>
+
+                <div class="form-group row">
+                    <button type="button" id="TD">TD</button>
+                    <button type="button" id="RY">RY</button>
+                    <button type="button" id="ENB">ENB</button>
+                    <button type="button" id="AAPL">AAPL</button>
+                    <button type="button" id="MFC">MFC</button>
+                    <button type="button" id="SU">SU</button>
+                </div>
+
+                <div class="form-group row">
+                    <label for="price" class="col-sm-2 col-form-label">Price</label>
+                    <div class="col-sm-4">
+                        <input id="price" name="price" class="form-control text-success" type="number" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="dividendYield" class="col-sm-2 col-form-label">Dividend Yield</label>
+                    <div class="col-sm-4">
+                        <input id="dividendYield" name="dividendYield" class="form-control" type="number" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="payoutFrequency" class="col-sm-2 col-form-label">Payout Frequency</label>
+                    <div class="col-sm-4">
+                        <input id="payoutFrequency" name="payoutFrequency" class="form-control" type="number" min="0" max="12" value="4">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="ownedShares" class="col-sm-2 col-form-label">Owned Shares</label>
+                    <div class="col-sm-4">
+                        <input id="ownedShares" name="ownedShares" class="form-control" type="number" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="row">
+                    <h2>Results</h2>
+                </div>
+
+                <div class="form-group row">
+                    <label for="dividendPayoutsPerShare" class="col-sm-2 col-form-label">Dividend Payouts Per Share</label>
+                    <div class="col-sm-4">
+                        <input id="dividendPayoutsPerShare" name="dividendPayoutsPerShare" aria-describedby="dividendPayoutsPerShareHelp" class="form-control" readonly>
+                        <small id="dividendPayoutsPerShareHelp" class="form-text text-muted">= (price * dividendYield) / payoutFrequency</small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="totalDividendPayout" class="col-sm-2 col-form-label">Total Dividend Payout</label>
+                    <div class="col-sm-4">
+                        <input id="totalDividendPayout" name="totalDividendPayout" aria-describedby="totalDividendPayoutHelp" class="form-control" readonly>
+                        <small id="totalDividendPayoutHelp" class="form-text text-muted">= ownedShares * dividendPayoutsPerShare</small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="totalSharesForDrip" class="col-sm-2 col-form-label">Total Shares for DRIP</label>
+                    <div class="col-sm-4">
+                        <input id="totalSharesForDrip" name="totalSharesForDrip" aria-describedby="totalSharesForDripHelp" class="form-control" readonly>
+                        <small id="totalSharesForDripHelp" class="form-text text-muted">= price / dividendPayoutsPerShare</small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="remainingSharesForDrip" class="col-sm-2 col-form-label">Remaining Shares for DRIP</label>
+                    <div class="col-sm-4">
+                        <input id="remainingSharesForDrip" name="remainingSharesForDrip" aria-describedby="remainingSharesForDripHelp" class="form-control" readonly>
+                        <small id="remainingSharesForDripHelp" class="form-text text-muted">= totalSharesForDrip - ownedShares</small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="totalCost" class="col-sm-2 col-form-label">Total Cost for Remaining Shares</label>
+                    <div class="col-sm-4">
+                        <input id="totalCost" name="totalCost" aria-describedby="totalCostHelp" class="form-control" readonly>
+                        <small id="dividendPayoutsPerShareHelp" class="form-text text-muted">= price * remainingSharesForDrip</small>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.8/jquery.fullPage.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.8/vendors/jquery.slimscroll.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+$(function() {
+    const calculateDrip = () => {
+        const price = document.getElementById('price').value;
+        const dividendYield = document.getElementById('dividendYield').value / 100;
+        const payoutFrequency = document.getElementById('payoutFrequency').value;
+        const ownedShares = document.getElementById('ownedShares').value;
+
+        const dividendPayoutsPerShare = (price * dividendYield) / payoutFrequency;
+        const totalDividendPayout = ownedShares * dividendPayoutsPerShare;
+        const totalSharesForDrip = Math.ceil(price / dividendPayoutsPerShare);
+        const remainingSharesForDrip = Math.max(0, Math.ceil(totalSharesForDrip - ownedShares));
+        const totalCost = price * remainingSharesForDrip;
+
+        document.getElementById('dividendPayoutsPerShare').value = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(dividendPayoutsPerShare);
+        document.getElementById('totalDividendPayout').value = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalDividendPayout);
+        document.getElementById('totalSharesForDrip').value = totalSharesForDrip;
+        document.getElementById('remainingSharesForDrip').value = remainingSharesForDrip;
+        document.getElementById('totalCost').value = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(totalCost);
+    };
+
+    const updateStockInfo = (price, dividendYield, payoutFrequency, ownedShares) => {
+        document.getElementById('price').value = price;
+        document.getElementById('dividendYield').value = dividendYield;
+        document.getElementById('payoutFrequency').value = payoutFrequency;
+        document.getElementById('ownedShares').value = ownedShares;
+    };
+
+    $('#price, #dividendYield, #payoutFrequency, #ownedShares').on('change keyup', calculateDrip);
+
+    $('#TD').on('click', function() {
+        updateStockInfo(105, 5, 4, 30);
+        calculateDrip();
+    });
+
+    $('#RY').on('click', function() {
+        updateStockInfo(150, 3.31, 4, 0);
+        calculateDrip();
+    });
+
+    $('#ENB').on('click', function() {
+        updateStockInfo(52.5, 6.56, 4, 75);
+        calculateDrip();
+    });
+
+    $('#AAPL').on('click', function() {
+        updateStockInfo(170, 0.5, 4, 27);
+        calculateDrip();
+    });
+
+    $('#MFC').on('click', function() {
+        updateStockInfo(27, 4.88, 4, 0);
+        calculateDrip();
+    });
+
+    $('#SU').on('click', function() {
+        updateStockInfo(29, 4.46, 4, 0);
+        calculateDrip();
+    });
+});
+
+</script>
+
+</body>
+</html>
