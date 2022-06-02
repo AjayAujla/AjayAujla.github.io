@@ -1,3 +1,11 @@
+# Stock Market Helper
+
+## Commands
+
+- install packages: `npm install`
+- run code: `npm run start`
+- run tests: `npm run test`
+
 # Deploying a React App* to GitHub Pages
 
 \* created using `create-react-app`
