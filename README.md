@@ -1,5 +1,9 @@
 # Stock Market Helper
 
+## References
+
+- https://codeburst.io/deploying-a-react-app-using-github-pages-and-github-actions-7fc14d380796
+
 ## Commands
 
 - install packages: `npm install`
