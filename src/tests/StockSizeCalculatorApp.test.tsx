@@ -1,10 +1,10 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import App from '../components/App';
+import StockSizeCalculatorApp from '../components/StockSizeCalculatorApp';
 
-test('renders learn react link', () => {
-  render(<App />);
+xtest('renders', () => {
+  render(<StockSizeCalculatorApp />);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });

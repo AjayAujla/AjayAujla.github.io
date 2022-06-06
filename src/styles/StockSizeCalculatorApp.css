@@ -1,0 +1,13 @@
+.StockSizeCalculatorApp {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: top;
+  justify-content: top;
+  font-size: calc(10px + 2vmin);
+}
+
+.StockSizeCalculatorApp-link {
+  color: #61dafb;
+}
