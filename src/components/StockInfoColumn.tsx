@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+
+import {formatToWholeNumber, formatToTwoDecimals, formatAsCurrency} from '../services/Utils';
 
 const StockInfoColumn = () => {
   // stock info
   const [balance, setBalance] = useState(2000);
   const [dailyProfitTarget, setDailyProfitTarget] = useState(50);
-  const [dailyMaxLoss, setDailyMaxLoss] = useState(-50);
+  const [dailyMaxLoss, setDailyMaxLoss] = useState(-dailyProfitTarget);
   const [stockPrice, setStockPrice] = useState(0);
 
   // results
@@ -17,28 +21,28 @@ const StockInfoColumn = () => {
 
   // update results when all info is set
   useEffect(() => {
-    setMaxShares(balance / stockPrice);
-    setProfitTarget((dailyProfitTarget + (stockPrice * maxShares)) / maxShares);
-    setStopLoss((dailyMaxLoss + (stockPrice * maxShares)) / maxShares);
+    console.log(balance, dailyProfitTarget, dailyMaxLoss, stockPrice);
+    setMaxShares(Math.round((balance / stockPrice) / 100) * 100);
+    setProfitTarget(formatToTwoDecimals((dailyProfitTarget + (stockPrice * maxShares)) / maxShares));
+    setStopLoss(formatToTwoDecimals((dailyMaxLoss + (stockPrice * maxShares)) / maxShares));
   }, [balance, dailyProfitTarget, dailyMaxLoss, stockPrice, maxShares]);
 
   return (
     <div>
-      <div>
-        <h2>Stock Info</h2>
+        <h3>Stock Info</h3>
         <TextField
           label="Balance"
           id="balance"
           name="balance"
           type="number"
           value={ balance }
-          onChange={(e: any) => setBalance(e.target.value) }
+          onChange={(e: any) => setBalance(parseInt(e.target.value)) }
           required
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           inputProps={{
-            step: "100",
+            step: 100,
             min: 0,
           }}
         />
@@ -48,14 +52,14 @@ const StockInfoColumn = () => {
           name="dailyProfitTarget"
           type="number"
           value={ dailyProfitTarget }
-          onChange={(e: any) => setDailyProfitTarget(e.target.value) }
+          onChange={(e: any) => { setDailyProfitTarget(parseInt(e.target.value)); setDailyMaxLoss(-parseInt(e.target.value)); } }
           required
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           inputProps={{
-            step: "50",
-            min: 0,
+            step: 50,
+            min: 50,
           }}
         />
         <TextField
@@ -64,13 +68,12 @@ const StockInfoColumn = () => {
           name="dailyMaxLoss"
           type="number"
           value={ dailyMaxLoss }
-          onChange={(e: any) => setDailyMaxLoss(e.target.value) }
+          onChange={(e: any) => { setDailyProfitTarget(-parseInt(e.target.value)); setDailyMaxLoss(parseInt(e.target.value)); } }
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           inputProps={{
-            readOnly: true,
-            step: "50",
+            step: 50,
             max: 0,
           }}
         />
@@ -80,20 +83,19 @@ const StockInfoColumn = () => {
           name="stockPrice"
           type="number"
           value={ stockPrice }
-          onChange={(e: any) => setStockPrice(e.target.value) }
+          onChange={(e: any) => setStockPrice(parseFloat(e.target.value)) }
           required
           InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
           inputProps={{
-            step: "0.1",
-            min: 0,
+            step: 0.25,
+            min: 1,
           }}
         />
-      </div>
 
-      <div>
-        <h2>Results</h2>
+        <h3>Results</h3>
+
         <TextField
           label="Max Shares"
           id="maxShares"
@@ -124,8 +126,30 @@ const StockInfoColumn = () => {
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }}
         />
-      </div>
 
+        <Slider
+          track={false}
+          min={stopLoss}
+          max={profitTarget}
+          value={(stopLoss && stockPrice && profitTarget) ? [stopLoss, stockPrice, profitTarget] : []}
+          marks={[
+            {
+              value: 2,
+              label: stopLoss && 'Stop Loss',
+            },
+            {
+              value: 3,
+              label: maxShares && `${maxShares} Max Shares`,
+            },
+            {
+              value: 4,
+              label: profitTarget && 'Profit Target',
+            },
+          ]}
+          getAriaValueText={formatAsCurrency}
+          valueLabelDisplay="on"
+
+        />
       {/*<Button>Clear</Button>*/}
 
     </div>

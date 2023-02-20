@@ -5,7 +5,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 
 const Presets = () => (
   <div>
-    <h2>Profit Target / Max Loss</h2>
+    <h3>Profit Target / Max Loss</h3>
     <ButtonGroup variant="contained" aria-label="outlined primary button group">
       <Button id="preset50">± $50</Button>
       <Button id="preset100">± $100</Button>
